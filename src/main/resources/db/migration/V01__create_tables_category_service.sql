@@ -8,8 +8,8 @@ PRIMARY KEY(category_id)
 CREATE TABLE service(
 service_id BIGSERIAL,
 service_name VARCHAR(100),
-service_category BIGINT,
+category_id BIGINT,
 PRIMARY KEY(service_id),
 CONSTRAINT fk_service_category
-  FOREIGN KEY(service_category) REFERENCES category(category_id)
+  FOREIGN KEY(category_id) REFERENCES category(category_id)
 );

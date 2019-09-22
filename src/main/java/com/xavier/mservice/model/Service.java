@@ -27,4 +27,12 @@ public class Service {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public boolean isNew() {
+        return this.serviceId == null;
+    }
+
+    public boolean Exist() {
+        return this.serviceId != null;
+    }
 }

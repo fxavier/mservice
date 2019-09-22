@@ -26,4 +26,16 @@ public class CategoryResource {
     public Category create(@Valid @RequestBody Category category) {
         return categoryService.save(category);
     }
+
+    @PutMapping("/{categoryId}")
+    public Category update(@PathVariable Long categoryId, @Valid @RequestBody Category category) {
+        category.setCategoryId(categoryId);
+        return categoryService.save(category);
+    }
+
+    @DeleteMapping("/{categoryId}")
+    public void remove(@PathVariable Long categoryId) {
+        categoryService.delete(categoryId);
+    }
+
 }

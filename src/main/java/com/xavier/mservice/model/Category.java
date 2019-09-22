@@ -20,7 +20,7 @@ public class Category {
 
     @NotBlank(message = "category-1")
     @Column(name = "category_name")
-    private String categoryName;
+    private String name;
 
     @Column(name = "image_url")
     private String imageUrl;

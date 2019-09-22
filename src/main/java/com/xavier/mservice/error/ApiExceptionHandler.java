@@ -1,6 +1,7 @@
 package com.xavier.mservice.error;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.xavier.mservice.service.exception.BusnessException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +56,14 @@ public class ApiExceptionHandler {
         final HttpStatus status = HttpStatus.BAD_REQUEST;
         final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale, exception.getValue()));
 
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(BusnessException.class)
+    public ResponseEntity<ErrorResponse> handleBusnessException(BusnessException exception, Locale locale) {
+        final String errorCode = exception.getCode();
+        final HttpStatus status = exception.getStatus();
+        final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale));
         return ResponseEntity.badRequest().body(errorResponse);
     }
 

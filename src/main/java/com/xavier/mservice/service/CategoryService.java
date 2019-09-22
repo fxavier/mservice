@@ -3,6 +3,7 @@ package com.xavier.mservice.service;
 import com.xavier.mservice.model.Category;
 import com.xavier.mservice.repository.CategoryRepository;
 import com.xavier.mservice.service.exception.CategoryExistException;
+import com.xavier.mservice.service.exception.CategoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,21 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public void delete(Long categoryId) {
+        verifyIfCategoryNotExist(categoryId);
+        categoryRepository.deleteById(categoryId);
+    }
+
+    private void verifyIfCategoryNotExist(Long categoryId) {
+        Optional<Category> foundCategory = categoryRepository.findById(categoryId);
+        if (!foundCategory.isPresent()) {
+            throw new CategoryNotFoundException();
+        }
+    }
+
 
     private void verifyIfCategoryExist(Category category) {
-        Optional<Category> foundCategory = categoryRepository.findByCategoryName(category.getCategoryName());
+        Optional<Category> foundCategory = categoryRepository.findByName(category.getName());
         if (foundCategory.isPresent() && (category.isNew() || isUpdatingToADifferentCategory(category, foundCategory))) {
             throw new CategoryExistException();
         }
