@@ -1,0 +1,5 @@
+ALTER TABLE project
+ADD COLUMN province VARCHAR(30) NOT NULL;
+
+ALTER TABLE freelancer
+ADD COLUMN province VARCHAR(30) NOT NULL;

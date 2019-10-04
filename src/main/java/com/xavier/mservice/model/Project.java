@@ -32,6 +32,9 @@ public class Project {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @Enumerated(EnumType.STRING)
+    private Province province;
+
     @NotNull(message = "project-3")
     @Column(name = "initial_price")
     private BigDecimal initialPrice;

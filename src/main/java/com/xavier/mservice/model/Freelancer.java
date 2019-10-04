@@ -34,6 +34,9 @@ public class Freelancer {
     @Column(name = "profile_picture")
     private String profilePicture;
 
+    @Enumerated(EnumType.STRING)
+    private Province province;
+
     @Column(name = "about_you")
     private String aboutYou;
 
